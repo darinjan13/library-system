@@ -2,10 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Library {
+public class Library extends JFrame{
     JPanel panel;
-    JButton viewBooks, addBooks, removeBook, borrowBook, searchBook;
-    public Library(Controller controller) {
+    JButton viewBooks, addBooks, removeBook, checkInBook, checkOutBook, searchBook;
+    public Library() {
+        Controller controller = new Controller();
         panel = new JPanel();
         panel.setBackground(Color.YELLOW);
         viewBooks = new JButton("View Books");
@@ -29,15 +30,35 @@ public class Library {
         removeBook.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.showRemoveBook();
+                try {
+                    controller.showRemoveBook();
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
-        borrowBook = new JButton("Borrow Book");
-        borrowBook.addActionListener(new ActionListener() {
+        checkInBook = new JButton("Check In Book");
+        checkInBook.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.showBorrowBook();
+                try {
+                    controller.showCheckInBook();
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
+        checkOutBook = new JButton("Check Out Book");
+        checkOutBook.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    controller.showCheckOutBook();
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
@@ -45,19 +66,26 @@ public class Library {
         searchBook.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.showSearchBook();
+                try {
+                    controller.showSearchBook();
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
         panel.add(viewBooks);
         panel.add(addBooks);
         panel.add(removeBook);
-        panel.add(borrowBook);
+        panel.add(checkInBook);
+        panel.add(checkOutBook);
         panel.add(searchBook);
-    }
-
-    public JPanel getPanel() {
-        return panel;
+        setTitle("Library System");
+        getContentPane().add(panel);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize(500, 150);
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
 }

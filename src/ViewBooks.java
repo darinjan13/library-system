@@ -1,5 +1,6 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedReader;
@@ -12,17 +13,16 @@ import java.util.List;
 public class ViewBooks extends JDialog {
     String[][] fileContents;
     DefaultTableModel model;
-    String[] columnNames = {"Title", "Author"};
+    String[] columnNames = {"Title", "Author", "Quantity"};
 
     JTable table;
 
     public ViewBooks(JFrame parent) {
         super(parent, "View Books", true);
-        addWindowListener(new WindowListener() {
+        addWindowListener(new WindowAdapter() {
             @Override
             public void windowOpened(WindowEvent e) throws NullPointerException{
-                System.out.println("ASD");
-                final File folder = new File("C:\\Users\\Admin\\IdeaProjects\\untitled\\src\\Books");
+                final File folder = new File("C:\\Users\\admin\\IdeaProjects\\library-system\\src\\Books");
                 File[] files = folder.listFiles();
                 fileContents = new String[files.length][];
                 for (int i = 0;i < files.length;i++) {
@@ -33,8 +33,8 @@ public class ViewBooks extends JDialog {
                             while ((line = br.readLine()) != null) {
                                 String removeTitle = line.replaceAll("Title: ", "");
                                 String removeAuthor = removeTitle.replaceAll("Author: ", "");
-
-                                lines.add(removeAuthor);
+                                String removeQuantity = removeAuthor.replaceAll("Quantity: ", "");
+                                lines.add(removeQuantity);
                             }
                             fileContents[i] = lines.toArray(new String[0]);
                         } catch (IOException exception) {
@@ -60,36 +60,6 @@ public class ViewBooks extends JDialog {
                 getContentPane().add(panel);
                 setSize(500, 500);
                 setLocationRelativeTo(parent);
-            }
-
-            @Override
-            public void windowClosing(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowClosed(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowIconified(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowDeiconified(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowActivated(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent e) {
-
             }
         });
 

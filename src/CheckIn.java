@@ -26,7 +26,11 @@ public class CheckIn extends JFrame {
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                login();
+                try {
+                    login();
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         add(studentName);
@@ -42,7 +46,7 @@ public class CheckIn extends JFrame {
     public void login() {
         if (!studentName.getText().isEmpty()) {
             Controller controller = new Controller();
-            controller.showMainPanel();
+//            controller.showMainPanel();
             setVisible(false);
         } else {
             JOptionPane.showMessageDialog(null, "Enter your Name.");

@@ -8,52 +8,53 @@ import java.awt.event.KeyEvent;
 public class SearchBook extends JDialog implements Sample{
     JTextField bookTitle;
     JButton search;
-    public SearchBook(JFrame parent) {
+    String title;
+    public SearchBook(JFrame parent, String[] books) {
         super(parent, "Search Book", true);
+
+        JPanel panel = new JPanel();
+        panel.setBackground(Color.ORANGE);
         bookTitle = new JTextField(14);
         bookTitle.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                String title = bookTitle.getText();
+                title = bookTitle.getText();
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    search(title);
+                    search(title, books);
                     bookTitle.setText("");
                 }
             }
         });
-        search = new JButton("Search Book");
+        search = new JButton("Press Enter");
+        search.setForeground(Color.BLACK);
+        search.setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 12));
+        search.setBackground(Color.darkGray);
         search.addActionListener(new ActionListener() {
-            String title = bookTitle.getText();
             @Override
             public void actionPerformed(ActionEvent e) {
-                search(title);
+                title = bookTitle.getText();
+                search(title, books);
+                bookTitle.setText("");
             }
         });
-        add(bookTitle);
-        add(search);
+        panel.add(bookTitle);
+        panel.add(search);
 
         setSize(300, 80);
         setLocationRelativeTo(parent);
-        setLayout(new FlowLayout(FlowLayout.LEFT));
+        panel.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+        add(panel);
 
     }
 
-    @Override
-    public String[] getFileNames() {
-        String[] files = new String[FILES.length];
-        for (int i = 0; i < FILES.length; i++) {
-            String fileName = FILES[i].getName();
-            files[i] = fileName.substring(0, fileName.lastIndexOf("."));
-        }
-        return files;
-    }
-    public void search(String title) {
+    public void search(String title, String[] books) {
         boolean bookFound = false;
         if (title.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please enter title of the book.");
             return;
         }
-        for (String book: getFileNames()) {
+        for (String book: books) {
             if (book.equalsIgnoreCase(title)) {
                 JOptionPane.showMessageDialog(null, "Book Found.");
                 bookFound = true;
