@@ -30,6 +30,8 @@ public class SearchBook extends JDialog {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER)
                     search(library);
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                    setVisible(false);
             }
         });
 

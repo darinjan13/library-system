@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class RemoveBook extends JDialog {
     Library library;
@@ -12,6 +14,13 @@ public class RemoveBook extends JDialog {
         this.library = library;
         String[] titles = library.getBookTitles().toArray(new String[0]);
         comboBox = new JComboBox<>(titles);
+        comboBox.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                    setVisible(false);
+            }
+        });
         removeButton = new JButton("Remove Book?");
         addBookButton = new JButton("Add Book");
 

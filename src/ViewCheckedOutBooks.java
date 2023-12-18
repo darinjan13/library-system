@@ -36,20 +36,20 @@ public class ViewCheckedOutBooks extends JDialog {
                     if (choice == 0) {
                         try {
                             PrintWriter writer = new PrintWriter( "BorrowedBooks.txt");
-                            String[] borrower1 = library.getBorrower().toArray(new String[0]);
-                            System.out.println(borrower1.length);
+                            System.out.println(library.borrowerLength());
                             for (Borrower borrower : library.getBorrower()) {
                                     Books borrowedBook = borrower.getBorrowedBook();
-                                    if (borrowedBook != null) {
-                                        writer.println("Borrower Name: " + borrower.getName());
-                                        writer.println("Contact: " + borrower.getContact());
-                                        writer.println("Borrowed Book Title: " + borrowedBook.getBookTitle());
-                                        writer.println("Borrowed Book Author: " + borrowedBook.getBookAuthor());
-                                    }
-                                    writer.close();
+                                if (borrowedBook != null) {
+                                    writer.println("Borrower Name: " + borrower.getName());
+                                    writer.println("Contact Number: " + borrower.getContact());
+                                    writer.println("Borrowed Book Title: " + borrowedBook.getBookTitle());
+                                    writer.println("Borrowed Book Author: " + borrowedBook.getBookAuthor());
+                                    writer.println("----------------------------");
                                 }
+                                }
+                            writer.close();
                         } catch (IOException ie) {
-                            JOptionPane.showMessageDialog(null, "Something error occured while printing the file,", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Something error occurred while printing the file,", "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     } else if (choice == 1) {
                         String name = JOptionPane.showInputDialog("Enter name of borrower");
@@ -63,6 +63,7 @@ public class ViewCheckedOutBooks extends JDialog {
                                         writer.println("Contact: " + borrower.getContact());
                                         writer.println("Borrowed Book Title: " + borrowedBook.getBookTitle());
                                         writer.println("Borrowed Book Author: " + borrowedBook.getBookAuthor());
+                                        writer.println("----------------------------");
                                     } else {
                                         JOptionPane.showMessageDialog(null, name + " has no borrowed books.");
                                     }
@@ -72,7 +73,7 @@ public class ViewCheckedOutBooks extends JDialog {
                                 }
                             }
                         } catch (IOException ie) {
-                            JOptionPane.showMessageDialog(null, "Something error occured while printing the file,", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Something error occurred while printing the file,", "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     }
             }

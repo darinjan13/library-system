@@ -23,6 +23,8 @@ public class CheckInBook extends JDialog {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER)
                     checkIn();
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                    setVisible(false);
             }
         });
 
@@ -79,10 +81,16 @@ public class CheckInBook extends JDialog {
         } else if (borrowerNameStr.isBlank()) {
             JOptionPane.showMessageDialog(null, "Please enter borrower's name.");
         } else {
-            library.checkInBook(bookTitleStr, borrowerNameStr);
-            JOptionPane.showMessageDialog(null, "Book has returned.");
-            bookTitle.setText("");
-            borrowerName.setText("");
+            if (!library.borrowerExists(borrowerNameStr)) {
+                JOptionPane.showMessageDialog(null, "You don't have any book borrowed.");
+            } else if (!library.borrowedBookExists(bookTitleStr)){
+                JOptionPane.showMessageDialog(null, "You did not borrow the book that you entered.");
+            } else {
+                library.checkInBook(bookTitleStr, borrowerNameStr);
+                JOptionPane.showMessageDialog(null, "Book has returned.");
+                bookTitle.setText("");
+                borrowerName.setText("");
+            }
         }
     }
 }

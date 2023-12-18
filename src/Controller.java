@@ -5,7 +5,7 @@ public class Controller{
     JFrame frame;
 
     public Controller() {
-        frame = new JFrame("Library System");
+        frame = new JFrame("Library Management System");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 //    public void showMainPanel() {

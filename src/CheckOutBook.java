@@ -19,6 +19,13 @@ public class CheckOutBook extends JDialog {
         String[] titles = library.getBookTitles().toArray(new String[0]);
         comboBox = new JComboBox<>(titles);
         comboBox.setPreferredSize(new Dimension(100, 30));
+        comboBox.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                    setVisible(false);
+            }
+        });
 
         borrowerName = new JTextField();
         borrowerName.setPreferredSize(new Dimension(150, 30));
@@ -27,6 +34,8 @@ public class CheckOutBook extends JDialog {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER)
                     checkOut();
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                    setVisible(false);
             }
         });
 
@@ -37,6 +46,8 @@ public class CheckOutBook extends JDialog {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER)
                     checkOut();
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                    setVisible(false);
             }
         });
 

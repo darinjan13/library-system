@@ -21,6 +21,8 @@ public class AddBooks extends JDialog{
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER)
                     addBook();
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                    setVisible(false);
             }
         });
 
@@ -33,6 +35,8 @@ public class AddBooks extends JDialog{
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER)
                     addBook();
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                    setVisible(false);
             }
         });
 

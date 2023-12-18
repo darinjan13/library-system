@@ -14,6 +14,9 @@ import java.util.List;
             addBook(books1);
         }
 
+        public int borrowerLength() {
+            return borrowers.size();
+        }
 
         public boolean isBookEmpty() {
             return books.isEmpty();
@@ -26,6 +29,24 @@ import java.util.List;
         public boolean isBookExist(Books book) {
             for (Books b : books) {
                 if (b.getBookTitle().equals(book.getBookTitle()) && b.getBookAuthor().equals(book.getBookAuthor())) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public boolean borrowerExists(String name) {
+            for (Borrower borrower : this.borrowers) {
+                if (borrower.getName().equals(name)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public boolean borrowedBookExists(String title) {
+            for (Borrower borrower : this.borrowers) {
+                if (borrower.getBorrowedBook().getBookTitle().equals(title)) {
                     return true;
                 }
             }
