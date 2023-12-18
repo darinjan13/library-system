@@ -1,17 +1,34 @@
 public class Books {
-    String title, author, borrowerName;
-    int quantity;
+    private String bookTitle;
+    private String bookAuthor;
+    private int bookQuantity;
 
-    public Books(String title, String author, int quantity) {
-        this.title = title;
-        this.author = author;
-        this.quantity = quantity;
+    public Books(String bookTitle, String bookAuthor, int bookQuantity) {
+        this.bookTitle = bookTitle;
+        this.bookAuthor = bookAuthor;
+        this.bookQuantity = bookQuantity;
     }
 
-    public Books(String title, String author, String borrowerName, int quantity) {
-        this.title = title;
-        this.author = author;
-        this.borrowerName = borrowerName;
-        this.quantity = quantity;
+    public String getBookTitle() {
+        return bookTitle;
+    }
+
+    public String getBookAuthor() {
+        return bookAuthor;
+    }
+
+    public int getBookQuantity() {
+        return bookQuantity;
+    }
+
+    public void setBookQuantity(int bookQuantity) {
+        this.bookQuantity = bookQuantity;
+    }
+
+    public void incrementQuantity() {
+        this.bookQuantity++;
+    }
+    public void decrementQuantity() {
+        this.bookQuantity--;
     }
 }

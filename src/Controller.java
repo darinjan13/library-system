@@ -1,6 +1,7 @@
 import javax.swing.*;
 
-public class Controller implements Sample{
+public class Controller{
+    Library library = new Library();
     JFrame frame;
 
     public Controller() {
@@ -17,43 +18,55 @@ public class Controller implements Sample{
 //    }
 
     public void showViewBooks() {
-        ViewBooks viewBooks = new ViewBooks(frame);
+        ViewBooks viewBooks = new ViewBooks(frame, library);
         viewBooks.setVisible(true);
     }
     public void showAddBook() {
-        AddBooks addBooks = new AddBooks(frame);
+        AddBooks addBooks = new AddBooks(frame, library);
         addBooks.setVisible(true);
     }
 
-    public void showRemoveBook() throws Exception {
-        WatchDirectory watchDirectory = new WatchDirectory(FOLDER_PATH);
-        watchDirectory.start();
-        RemoveBook removeBook = new RemoveBook(frame, watchDirectory.getFileNames());
-        if (watchDirectory.getFileNames().length != 0) {
-            removeBook.setVisible(true);
+    public void showRemoveBook() {
+        RemoveBook removeBook = new RemoveBook(frame, library);
+        if (library.isBookEmpty()) {
+            JOptionPane.showMessageDialog(null, "Book is empty.", JOptionPane.OPTIONS_PROPERTY, JOptionPane.ERROR_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Book is empty.");
+            removeBook.setVisible(true);
         }
     }
 
-    public void showCheckInBook() throws Exception {
-        WatchDirectory watchDirectory = new WatchDirectory(FOLDER_PATH);
-        watchDirectory.start();
-        CheckInBook checkInBook = new CheckInBook(frame, watchDirectory.getFileNames());
-        checkInBook.setVisible(true);
+    public void showCheckInBook() {
+        CheckInBook checkInBook = new CheckInBook(frame, library);
+        if (library.isBorrowerEmpty()) {
+            JOptionPane.showMessageDialog(null, "Book is empty.", JOptionPane.OPTIONS_PROPERTY, JOptionPane.ERROR_MESSAGE);
+        } else {
+            checkInBook.setVisible(true);
+        }
     }
 
-    public void showCheckOutBook() throws Exception {
-        WatchDirectory watchDirectory = new WatchDirectory(FOLDER_PATH);
-        watchDirectory.start();
-        CheckOutBook checkOutBook = new CheckOutBook(frame, watchDirectory.getFileNames());
-        checkOutBook.setVisible(true);
+    public void showCheckOutBook() {
+        CheckOutBook checkOutBook = new CheckOutBook(frame, library);
+        if (library.isBookEmpty()) {
+            JOptionPane.showMessageDialog(null, "Book is empty.", JOptionPane.OPTIONS_PROPERTY, JOptionPane.ERROR_MESSAGE);
+        } else {
+            checkOutBook.setVisible(true);
+        }
     }
 
-    public void showSearchBook() throws Exception {
-        WatchDirectory watchDirectory = new WatchDirectory(FOLDER_PATH);
-        watchDirectory.start();
-        SearchBook searchBook = new SearchBook(frame, watchDirectory.getFileNames());
-        searchBook.setVisible(true);
+    public void showSearchBook() {
+        SearchBook searchBook = new SearchBook(frame, library);
+        if (library.isBookEmpty()) {
+            JOptionPane.showMessageDialog(null, "Book is empty.", JOptionPane.OPTIONS_PROPERTY, JOptionPane.ERROR_MESSAGE);
+        } else {
+            searchBook.setVisible(true);
+        }
+    }
+    public void showViewCheckedOutBooks() {
+        ViewCheckedOutBooks viewCheckedOutBooks = new ViewCheckedOutBooks(frame, library);
+        if (library.isBorrowerEmpty()) {
+            JOptionPane.showMessageDialog(null, "There is currently no checked out book.", JOptionPane.OPTIONS_PROPERTY, JOptionPane.ERROR_MESSAGE);
+        } else {
+            viewCheckedOutBooks.setVisible(true);
+        }
     }
 }
