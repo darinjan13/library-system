@@ -22,7 +22,7 @@ public class AddBooks extends JDialog{
                 if (e.getKeyCode() == KeyEvent.VK_ENTER)
                     addBook();
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
-                    setVisible(false);
+                    dispose();
             }
         });
 
@@ -36,7 +36,7 @@ public class AddBooks extends JDialog{
                 if (e.getKeyCode() == KeyEvent.VK_ENTER)
                     addBook();
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
-                    setVisible(false);
+                    dispose();
             }
         });
 
@@ -49,6 +49,8 @@ public class AddBooks extends JDialog{
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER)
                     addBook();
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                    dispose();
             }
         });
 
@@ -68,6 +70,15 @@ public class AddBooks extends JDialog{
         add(quantityLabel);
         add(quantity);
         add(addBook);
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                    dispose();
+            }
+        });
+
+        setFocusable(true);
 
         setSize(300, 300);
         setLocationRelativeTo(parent);

@@ -46,6 +46,16 @@ public class RemoveBook extends JDialog {
         panel.setBounds(10,10,300,300);
         panel.add(comboBox);
         panel.add(removeButton);
+
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                    dispose();
+            }
+        });
+
+        setFocusable(true);
         getContentPane().add(panel);
         setSize(300, 300);
         setLocationRelativeTo(parent);

@@ -82,6 +82,16 @@ public class CheckOutBook extends JDialog {
         for (int i = 0; i < 4; i++) {
             getContentPane().add(panel[i]);
         }
+
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                    dispose();
+            }
+        });
+
+        setFocusable(true);
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         setSize(500, 300);
         setLocationRelativeTo(parent);

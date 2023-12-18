@@ -24,7 +24,7 @@ public class CheckInBook extends JDialog {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER)
                     checkIn();
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
-                    setVisible(false);
+                    dispose();
             }
         });
 
@@ -37,6 +37,8 @@ public class CheckInBook extends JDialog {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     checkIn();
                 }
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                    dispose();
             }
         });
 
@@ -68,6 +70,16 @@ public class CheckInBook extends JDialog {
         for (int i = 0; i < 3; i++) {
             getContentPane().add(panel[i]);
         }
+
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                    dispose();
+            }
+        });
+
+        setFocusable(true);
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         setSize(500, 300);
         setLocationRelativeTo(parent);

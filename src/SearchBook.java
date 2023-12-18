@@ -60,6 +60,16 @@ public class SearchBook extends JDialog {
         add(textField);
         add(search);
         add(booksScrollPane);
+
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                    dispose();
+            }
+        });
+
+        setFocusable(true);
         setSize(300, 300);
         setLayout(null);
         setLocationRelativeTo(parent);

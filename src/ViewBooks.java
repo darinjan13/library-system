@@ -37,6 +37,15 @@ public class ViewBooks extends JDialog {
         panel.add(booksScrollPane);
         add(panel);
 
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                    dispose();
+            }
+        });
+
+        setFocusable(true);
         setSize(500, 500);
         getContentPane().add(panel);
         setLocationRelativeTo(parent);
